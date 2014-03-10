@@ -130,8 +130,23 @@ public class MainActivity extends ActionBarActivity
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
+            View rootView;
+            switch (getArguments().getInt(ARG_SECTION_NUMBER)){
+                case 1:
+                    rootView = inflater.inflate(R.layout.show_messages, container, false);
+                    break;
+                case 2:
+                    rootView = inflater.inflate(R.layout.send_morse, container, false);
+                    break;
+                case 3:
+                    rootView = inflater.inflate(R.layout.show_friends, container, false);
+                    break;
+                default:
+                    rootView = inflater.inflate(R.layout.show_messages, container, false);
+                    break;
+            }
             //View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-            View rootView = inflater.inflate(R.layout.send_morse, container, false);
+            //View rootView = inflater.inflate(R.layout.send_morse, container, false);
             //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             //textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
             return rootView;
