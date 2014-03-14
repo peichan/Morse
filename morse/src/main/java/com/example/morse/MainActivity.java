@@ -17,6 +17,11 @@ import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+import android.widget.Button;
+
+import java.util.List;
 
 public class MainActivity extends ActionBarActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -44,6 +49,7 @@ public class MainActivity extends ActionBarActivity
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+
     }
 
     @Override
@@ -131,15 +137,25 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {
             View rootView;
+            ListView lv;
+            ArrayAdapter<String> adapter;
             switch (getArguments().getInt(ARG_SECTION_NUMBER)){
                 case 1:
                     rootView = inflater.inflate(R.layout.show_messages, container, false);
+                    lv = (ListView) rootView.findViewById(R.id.message_listView);
+                    String[] messages = {"mhidaka", "rongon_xp", "kacchi0516", "kobashinG", "seit", "kei_i_t", "furusin_oriver"};
+                    adapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, messages);
+                    lv.setAdapter(adapter);
                     break;
                 case 2:
                     rootView = inflater.inflate(R.layout.send_morse, container, false);
                     break;
                 case 3:
                     rootView = inflater.inflate(R.layout.show_friends, container, false);
+                    lv = (ListView) rootView.findViewById(R.id.friend_listView);
+                    String[] members = {"げん", "レテ", "タケ", "ぺい"};
+                    adapter = new ArrayAdapter<String>(getActivity().getBaseContext(), android.R.layout.simple_list_item_1, members);
+                    lv.setAdapter(adapter);
                     break;
                 default:
                     rootView = inflater.inflate(R.layout.show_messages, container, false);
@@ -149,6 +165,7 @@ public class MainActivity extends ActionBarActivity
             //View rootView = inflater.inflate(R.layout.send_morse, container, false);
             //TextView textView = (TextView) rootView.findViewById(R.id.section_label);
             //textView.setText(Integer.toString(getArguments().getInt(ARG_SECTION_NUMBER)));
+
             return rootView;
         }
 
